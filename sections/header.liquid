@@ -424,6 +424,25 @@
   }
 
   customElements.define('sticky-header', StickyHeader);
+
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[href^="#"]');
+    if (!link) return;
+
+    const targetSelector = link.getAttribute('href');
+    if (!targetSelector || targetSelector === '#') return;
+
+    const target = document.querySelector(targetSelector);
+    if (!target) return;
+
+    event.preventDefault();
+    const header = document.querySelector('.section-header');
+    const offset = header ? header.offsetHeight + 16 : 32;
+    const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+
+    window.scrollTo({ top, behavior: 'smooth' });
+    history.pushState(null, '', targetSelector);
+  });
 {% endjavascript %}
 
 <script type="application/ld+json">

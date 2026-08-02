@@ -1,5 +1,5 @@
 {% comment %}Architecture decision: Reviews uses local testimonial rating markup because purelane-rating-stars reads product review-app metafields, while these blocks own raw testimonial ratings.{% endcomment %}
-<section class="purelane-reviews purelane-reviews--{{ section.settings.layout }} color-{{ section.settings.color_scheme }} gradient" style="--purelane-reviews-padding-top: {{ section.settings.padding_top }}px; --purelane-reviews-padding-bottom: {{ section.settings.padding_bottom }}px;">
+<section id="reviews" class="purelane-reviews purelane-reviews--{{ section.settings.layout }} color-{{ section.settings.color_scheme }} gradient" style="--purelane-reviews-padding-top: {{ section.settings.padding_top }}px; --purelane-reviews-padding-bottom: {{ section.settings.padding_bottom }}px;">
   <div class="purelane-reviews__inner page-width">
     {% render 'purelane-section-heading', heading: section.settings.heading, eyebrow: section.settings.eyebrow, description: section.settings.description, alignment: section.settings.content_alignment, heading_tag: 'h2' %}
     <div class="purelane-reviews__cards" role="list"{% if section.settings.layout == 'rail' %} tabindex="0" aria-label="{{ section.settings.rail_label | escape }}"{% endif %}>

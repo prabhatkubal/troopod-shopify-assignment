@@ -11,7 +11,7 @@
   endif
 -%}
 
-<section class="purelane-shop color-{{ section.settings.color_scheme }} gradient" style="--purelane-shop-padding-top: {{ section.settings.padding_top }}px; --purelane-shop-padding-bottom: {{ section.settings.padding_bottom }}px; --purelane-shop-columns-mobile: {{ section.settings.columns_mobile }}; --purelane-shop-columns-tablet: {{ section.settings.columns_tablet }}; --purelane-shop-columns-desktop: {{ section.settings.columns_desktop }};">
+<section id="shop" class="purelane-shop color-{{ section.settings.color_scheme }} gradient" style="--purelane-shop-padding-top: {{ section.settings.padding_top }}px; --purelane-shop-padding-bottom: {{ section.settings.padding_bottom }}px; --purelane-shop-columns-mobile: {{ section.settings.columns_mobile }}; --purelane-shop-columns-tablet: {{ section.settings.columns_tablet }}; --purelane-shop-columns-desktop: {{ section.settings.columns_desktop }};">
   <div class="purelane-shop__inner page-width">
     {% render 'purelane-section-heading', heading: section.settings.heading, eyebrow: section.settings.eyebrow, description: section.settings.description, alignment: section.settings.content_alignment, heading_tag: 'h2' %}
 

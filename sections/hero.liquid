@@ -5,7 +5,7 @@
   {%- assign purelane_heading_tag = 'h1' -%}
 {%- endif -%}
 
-<section class="purelane-hero color-{{ section.settings.color_scheme }} gradient" style="--purelane-hero-overlay: {{ section.settings.overlay_color }}; --purelane-hero-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; --purelane-hero-fallback: {{ section.settings.background_color }}; --purelane-hero-padding-top: {{ section.settings.padding_top }}px; --purelane-hero-padding-bottom: {{ section.settings.padding_bottom }}px;">
+<section id="hero" class="purelane-hero color-{{ section.settings.color_scheme }} gradient" style="--purelane-hero-overlay: {{ section.settings.overlay_color }}; --purelane-hero-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; --purelane-hero-fallback: {{ section.settings.background_color }}; --purelane-hero-padding-top: {{ section.settings.padding_top }}px; --purelane-hero-padding-bottom: {{ section.settings.padding_bottom }}px;">
   {%- if section.settings.background_image != blank -%}
     <div class="purelane-hero__background" aria-hidden="true">
       {{ section.settings.background_image | image_url: width: 3840 | image_tag: widths: '375, 550, 750, 1100, 1500, 2000, 3000, 3840', sizes: '100vw', loading: 'eager', fetchpriority: 'auto', class: 'purelane-hero__background-image', alt: '' }}
