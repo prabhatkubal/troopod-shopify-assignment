@@ -9,76 +9,178 @@
  */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "hero_mV6M6r": {
+      "type": "hero",
       "blocks": {
-        "heading": {
+        "heading_JDEe6z": {
           "type": "heading",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "heading": "Clean that lasts",
+            "eyebrow": "",
+            "description": "<p>Homecare that works on the toughest grime, made from plants. Kind to your home, your family and the world outside it.</p>"
           }
         },
-        "button": {
-          "type": "buttons",
+        "button_WrbHUD": {
+          "type": "button",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "label": "Shop now",
+            "url": "",
+            "style": "primary"
+          }
+        },
+        "button_BGVgiP": {
+          "type": "button",
+          "settings": {
+            "label": "How it works ?",
+            "url": "",
+            "style": "secondary"
+          }
+        },
+        "badge_rLzRdA": {
+          "type": "badge",
+          "settings": {
+            "label": "Plant powered",
+            "variant": "promotional"
+          }
+        },
+        "badge_QAccz3": {
+          "type": "badge",
+          "settings": {
+            "label": "Kids and pet safe",
+            "variant": "promotional"
+          }
+        },
+        "badge_jHpptH": {
+          "type": "badge",
+          "settings": {
+            "label": "Zero harsh chemicals",
+            "variant": "promotional"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "heading_JDEe6z",
+        "button_WrbHUD",
+        "button_BGVgiP",
+        "badge_rLzRdA",
+        "badge_QAccz3",
+        "badge_jHpptH"
       ],
+      "custom_css": [],
+      "name": "Purelane hero",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "background_image": "shopify://shop_images/Generated_Image_August_02_2026_-_8_32PM.jpg",
+        "background_color": "#f4f7f2",
+        "overlay_color": "#16E3D3",
+        "overlay_opacity": 25,
+        "color_scheme": "",
+        "content_alignment": "left",
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "shop_cfzNAN": {
+      "type": "shop",
+      "name": "Purelane shop",
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
+        "collection": "shop",
         "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
+        "heading": "Loved by every home",
+        "eyebrow": "Best sellers",
+        "description": "",
+        "content_alignment": "left",
+        "image_ratio": "square",
+        "show_rating": true,
         "columns_mobile": "2",
-        "padding_top": 44,
+        "columns_tablet": "2",
+        "columns_desktop": "4",
+        "view_all_label": "View all",
+        "empty_state_message": "Choose a collection with products to display.",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "bundles_R6nzJ9": {
+      "type": "bundles",
+      "blocks": {
+        "bundle_tier_trmWQJ": {
+          "type": "bundle_tier",
+          "settings": {
+            "bundle_definition": "bundle-definition-kqv0zfde"
+          }
+        },
+        "bundle_tier_mbYdkJ": {
+          "type": "bundle_tier",
+          "settings": {
+            "bundle_definition": "bundle-definition-yeh95yfi"
+          }
+        }
+      },
+      "block_order": [
+        "bundle_tier_trmWQJ",
+        "bundle_tier_mbYdkJ"
+      ],
+      "name": "Purelane bundles",
+      "settings": {
+        "heading": "One box. Every room.",
+        "eyebrow": "Build your bundle",
+        "description": "",
+        "content_alignment": "left",
+        "color_scheme": "",
+        "empty_state_message": "Add a bundle definition to display a tier.",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "combos_AkLAtF": {
+      "type": "combos",
+      "blocks": {
+        "combo_z7wDp9": {
+          "type": "combo",
+          "settings": {
+            "bundle_definition": "bundle-definition-w5ibaays"
+          }
+        }
+      },
+      "block_order": [
+        "combo_z7wDp9"
+      ],
+      "name": "Purelane combos",
+      "settings": {
+        "heading": "Best-selling combos",
+        "eyebrow": "Pre-built to save you money",
+        "description": "",
+        "content_alignment": "left",
+        "layout": "rail",
+        "rail_label": "Best-selling combos",
+        "empty_state_message": "Add a bundle definition to display a combo.",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "reviews_yczmXi": {
+      "type": "reviews",
+      "name": "Purelane reviews",
+      "settings": {
+        "heading": "What customers say",
+        "eyebrow": "",
+        "description": "",
+        "content_alignment": "center",
+        "layout": "rail",
+        "rail_label": "Customer reviews",
+        "color_scheme": "",
+        "padding_top": 36,
         "padding_bottom": 36
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "hero_mV6M6r",
+    "shop_cfzNAN",
+    "bundles_R6nzJ9",
+    "combos_AkLAtF",
+    "reviews_yczmXi"
   ]
 }
