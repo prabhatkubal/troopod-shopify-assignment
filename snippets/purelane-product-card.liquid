@@ -10,19 +10,34 @@
   @param {boolean} [compact] - Render the compact product representation.
 {% enddoc %}
 
+{%- liquid
+  assign purelane_media = product.featured_media
+  if purelane_media == blank
+    assign purelane_media = product.featured_image
+  endif
+  if purelane_media == blank and product.media != blank
+    assign purelane_media = product.media.first
+  endif
+  assign purelane_marketing_label = product.metafields.custom.marketing_label.value
+  assign purelane_is_on_sale = false
+  if product.compare_at_price > product.price
+    assign purelane_is_on_sale = true
+  endif
+-%}
+
 {%- if compact -%}
   <article class="purelane-product-card purelane-product-card--compact">
     <a class="purelane-product-card__media" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
-      {%- if product.featured_media != blank -%}
+      {%- if purelane_media != blank -%}
         {{
-          product.featured_media
+          purelane_media
           | image_url: width: 240
           | image_tag:
             widths: '120, 180, 240',
             sizes: '72px',
             loading: 'lazy',
             class: 'purelane-product-card__image',
-            alt: product.featured_media.alt
+            alt: purelane_media.alt | default: product.title
         }}
       {%- else -%}
         {{ 'product-apparel-2' | placeholder_svg_tag: 'purelane-product-card__placeholder placeholder-svg' }}
@@ -32,8 +47,8 @@
   </article>
 {%- else -%}
   <div class="purelane-product-card">
-    {%- if product.metafields.custom.marketing_label.value != blank and product.available -%}
-      {% render 'purelane-badge', label: product.metafields.custom.marketing_label.value, variant: 'promotional' %}
+    {%- if purelane_marketing_label != blank and product.available and purelane_is_on_sale == false -%}
+      {% render 'purelane-badge', label: purelane_marketing_label, variant: 'promotional' %}
     {%- endif -%}
     {% render 'card-product', card_product: product, media_aspect_ratio: media_aspect_ratio, show_rating: show_rating, quick_add: quick_add, section_id: section_id %}
   </div>

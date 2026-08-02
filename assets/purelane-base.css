@@ -27,8 +27,35 @@
 }
 
 .purelane-button {
-  border-radius: var(--purelane-button-radius);
-  transition: transform var(--purelane-animation-duration) ease, box-shadow var(--purelane-animation-duration) ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 4.4rem;
+  padding: 0.9rem 1.8rem;
+  border: 0.1rem solid transparent;
+  border-radius: 999px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  transition: transform var(--purelane-animation-duration) ease, box-shadow var(--purelane-animation-duration) ease, background-color var(--purelane-animation-duration) ease;
+}
+
+.purelane-button:not(.button--secondary) {
+  background: linear-gradient(135deg, var(--purelane-accent-color), #c8761f);
+  color: #0e1b17;
+  box-shadow: 0 1.2rem 2.4rem rgba(201, 118, 31, 0.22);
+}
+
+.purelane-button.button--secondary {
+  border-color: rgba(var(--color-foreground), 0.2);
+  background: rgba(var(--color-foreground), 0.04);
+  color: rgb(var(--color-foreground));
+}
+
+.purelane-button:hover {
+  transform: translateY(-1px);
 }
 
 .purelane-button:focus-visible,

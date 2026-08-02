@@ -1,5 +1,6 @@
 .purelane-product-card {
   position: relative;
+  overflow: hidden;
 }
 
 .purelane-product-card > .purelane-badge {
@@ -7,6 +8,8 @@
   z-index: 1;
   top: var(--purelane-space-2);
   left: var(--purelane-space-2);
+  max-width: calc(100% - var(--purelane-space-4));
+  white-space: normal;
 }
 
 .purelane-product-card .card__heading {
@@ -26,6 +29,7 @@
   grid-template-columns: 7.2rem minmax(0, 1fr);
   align-items: center;
   gap: var(--purelane-space-3);
+  min-width: 0;
 }
 
 .purelane-product-card__media {
@@ -44,6 +48,7 @@
 }
 
 .purelane-product-card__title {
+  min-width: 0;
   color: rgb(var(--color-foreground));
   font-size: 1.3rem;
   font-weight: 600;
@@ -109,10 +114,19 @@
 
 .purelane-section-heading__title {
   margin: 0;
+  font-family: var(--font-heading-family);
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-weight: 700;
+  line-height: 0.94;
+  letter-spacing: -0.04em;
 }
 
 .purelane-section-heading__description {
   margin-top: var(--purelane-space-3);
+  max-width: 62rem;
+  color: rgba(var(--color-foreground), 0.76);
+  font-size: 1.5rem;
+  line-height: 1.6;
 }
 
 .purelane-rating-stars {
