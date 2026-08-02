@@ -162,6 +162,50 @@
     },
     "reviews_yczmXi": {
       "type": "reviews",
+      "blocks": {
+        "review_d9xvL2": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Rohit S.",
+            "rating": 5,
+            "review": "<p>Hard water had ruined our bathroom fittings. Two sprays and the scale wipes straight off, no scrubbing.</p>",
+            "location": "Floor cleaner"
+          }
+        },
+        "review_K7mVq4": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Sunita",
+            "rating": 5,
+            "review": "<p>Very soft on hands with a lovely fragrance, and it feels good to be using far less plastic.</p>",
+            "location": "Liquid handwash"
+          }
+        },
+        "review_Mp5qT1": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Priya",
+            "rating": 5,
+            "review": "<p>Our old dishwasher left my help with dry, cracked skin. That stopped completely after we switched.</p>",
+            "location": "Dishwash gel"
+          }
+        },
+        "review_Qp2rX8": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Verified buyer",
+            "rating": 5,
+            "review": "<p>Sparkling taps again</p>",
+            "location": "Tap cleaner"
+          }
+        }
+      },
+      "block_order": [
+        "review_d9xvL2",
+        "review_K7mVq4",
+        "review_Mp5qT1",
+        "review_Qp2rX8"
+      ],
       "name": "Purelane reviews",
       "settings": {
         "heading": "What customers say",
