@@ -104,6 +104,12 @@
     "bundles_R6nzJ9": {
       "type": "bundles",
       "blocks": {
+        "bundle_tier_WLCkQH": {
+          "type": "bundle_tier",
+          "settings": {
+            "bundle_definition": "bundle-definition-w5ibaays"
+          }
+        },
         "bundle_tier_trmWQJ": {
           "type": "bundle_tier",
           "settings": {
@@ -118,6 +124,7 @@
         }
       },
       "block_order": [
+        "bundle_tier_WLCkQH",
         "bundle_tier_trmWQJ",
         "bundle_tier_mbYdkJ"
       ],
@@ -136,6 +143,12 @@
     "combos_AkLAtF": {
       "type": "combos",
       "blocks": {
+        "combo_zJ4kfm": {
+          "type": "combo",
+          "settings": {
+            "bundle_definition": "bundle-definition-yeh95yfi"
+          }
+        },
         "combo_z7wDp9": {
           "type": "combo",
           "settings": {
@@ -144,6 +157,7 @@
         }
       },
       "block_order": [
+        "combo_zJ4kfm",
         "combo_z7wDp9"
       ],
       "name": "Purelane combos",
