@@ -42,7 +42,7 @@ reason. This is also a natural place to note what you did NOT get to, per their 
 
 - **Hero:** The prototype's static copy, inline product stage, duplicate desktop/mobile promise markup, and scroll-linked animated scenes are now a merchant-editable section with shared heading/button/badge/bundle-card snippets, separate background and foreground media, and no scene animation system — product content stays editable and the architecture performance decision is applied.
 - **Shop / Product Grid:** The prototype's hardcoded product cards, prices, ratings, and inline SVG product artwork are now a collection-driven grid using the seeded Best Sellers collection and shared product-card rendering — catalog data and edge-case handling come from Shopify products instead of page markup.
-- **Best-selling Combos:** [not yet started] — update once built
+- **Best-selling Combos:** The prototype's hardcoded combo cards and duplicated bundle details are now repeatable blocks that reference shared bundle-definition records and render through one bundle-card path — canonical bundle content is reused across placements.
 - **Bundles:** [not yet started] — update once built
 - **Reviews Rail:** [not yet started] — update once built
 

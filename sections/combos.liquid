@@ -1,0 +1,44 @@
+{% comment %}Architecture decision: Combos uses the one shared bundle_definition model and shared bundle-card render path in a prototype-inspired rail or grid.{% endcomment %}
+<section class="purelane-combos purelane-combos--{{ section.settings.layout }} color-{{ section.settings.color_scheme }} gradient" style="--purelane-combos-padding-top: {{ section.settings.padding_top }}px; --purelane-combos-padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="purelane-combos__inner page-width">
+    {% render 'purelane-section-heading', heading: section.settings.heading, eyebrow: section.settings.eyebrow, description: section.settings.description, alignment: section.settings.content_alignment, heading_tag: 'h2' %}
+    <div class="purelane-combos__cards" role="list"{% if section.settings.layout == 'rail' %} tabindex="0" aria-label="{{ section.settings.rail_label | escape }}"{% endif %}>
+      {%- for block in section.blocks -%}
+        {%- if block.settings.bundle_definition != blank -%}
+          <div class="purelane-combos__card" role="listitem" {{ block.shopify_attributes }}>
+            {% render 'purelane-bundle-card', bundle_definition: block.settings.bundle_definition, variant: 'combo' %}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .purelane-combos { padding-top: var(--purelane-combos-padding-top); padding-bottom: var(--purelane-combos-padding-bottom); }
+  .purelane-combos__cards { display: grid; gap: var(--purelane-space-4); margin-top: var(--purelane-space-8); }
+  .purelane-combos--rail .purelane-combos__cards { grid-auto-columns: minmax(28rem, 36rem); grid-auto-flow: column; grid-template-columns: none; overflow-x: auto; overscroll-behavior-inline: contain; padding: 0 0 var(--purelane-space-3); scroll-snap-type: inline mandatory; scrollbar-width: thin; }
+  .purelane-combos--rail .purelane-combos__card { scroll-snap-align: start; }
+  .purelane-combos__cards:focus-visible { outline: 0.2rem solid rgb(var(--color-foreground)); outline-offset: 0.4rem; }
+  @media screen and (min-width: 750px) { .purelane-combos--grid .purelane-combos__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media screen and (min-width: 990px) { .purelane-combos--grid .purelane-combos__cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Purelane combos", "tag": "section", "class": "section",
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Best-selling combos" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Pre-built to save you money" },
+    { "type": "richtext", "id": "description", "label": "Description" },
+    { "type": "select", "id": "content_alignment", "label": "Heading alignment", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "left" },
+    { "type": "select", "id": "layout", "label": "Layout", "options": [{ "value": "rail", "label": "Scrollable rail" }, { "value": "grid", "label": "Grid" }], "default": "rail" },
+    { "type": "text", "id": "rail_label", "label": "Scrollable rail label", "default": "Best-selling combos" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding top", "default": 36 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding bottom", "default": 36 }
+  ],
+  "blocks": [{ "type": "combo", "name": "Combo", "settings": [{ "type": "metaobject", "id": "bundle_definition", "label": "Bundle definition", "metaobject_type": "bundle_definition" }] }],
+  "presets": [{ "name": "Purelane combos" }]
+}
+{% endschema %}
