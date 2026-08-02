@@ -46,6 +46,12 @@ reason. This is also a natural place to note what you did NOT get to, per their 
 - **Bundles:** The prototype's three hardcoded quantity and price tiers are now repeatable blocks referencing the shared bundle-definition records and the shared bundle-card renderer — tier order and visibility are editable while product pricing stays catalog-owned.
 - **Reviews Rail:** The prototype's duplicated auto-marquee cards and hardcoded five-star reviews are now merchant-managed testimonial blocks in a keyboard-focusable manual rail or grid, with each rating rendered from its block value — reviews are announced once and no content is duplicated for animation.
 
+- **Hero (hardening):** The background image priority changed from high to auto and duplicate-section headings now demote to `h2`; the foreground product image remains the high-priority LCP candidate.
+- **Shop / Product Grid (hardening):** The unused pagination wrapper was removed; the existing product limit and View All link remain the collection-navigation path.
+- **Best-selling Combos (hardening):** An editable empty-state message now renders when no valid bundle-definition block resolves.
+- **Bundles (hardening):** An editable empty-state message now renders when no valid bundle-definition block resolves; unused placement variant hooks were removed from the shared bundle-card path.
+- **Reviews Rail (hardening):** The manual rail remains non-autoplaying and does not duplicate testimonial cards; no foundation changes were required.
+
 ## What I'd do with more time
 
 <!--

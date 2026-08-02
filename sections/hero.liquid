@@ -1,10 +1,14 @@
 {% comment %}Architecture decision: Hero owns merchant-editable media and uses shared blocks, without restoring the prototype's scroll-linked scene system.{% endcomment %}
 {%- assign purelane_heading = section.blocks | where: 'type', 'heading' | first -%}
+{%- assign purelane_heading_tag = 'h2' -%}
+{%- if section.index == 1 -%}
+  {%- assign purelane_heading_tag = 'h1' -%}
+{%- endif -%}
 
 <section class="purelane-hero color-{{ section.settings.color_scheme }} gradient" style="--purelane-hero-overlay: {{ section.settings.overlay_color }}; --purelane-hero-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; --purelane-hero-fallback: {{ section.settings.background_color }}; --purelane-hero-padding-top: {{ section.settings.padding_top }}px; --purelane-hero-padding-bottom: {{ section.settings.padding_bottom }}px;">
   {%- if section.settings.background_image != blank -%}
     <div class="purelane-hero__background" aria-hidden="true">
-      {{ section.settings.background_image | image_url: width: 3840 | image_tag: widths: '375, 550, 750, 1100, 1500, 2000, 3000, 3840', sizes: '100vw', loading: 'eager', fetchpriority: 'high', class: 'purelane-hero__background-image', alt: '' }}
+      {{ section.settings.background_image | image_url: width: 3840 | image_tag: widths: '375, 550, 750, 1100, 1500, 2000, 3000, 3840', sizes: '100vw', loading: 'eager', fetchpriority: 'auto', class: 'purelane-hero__background-image', alt: '' }}
     </div>
   {%- endif -%}
   <div class="purelane-hero__overlay" aria-hidden="true"></div>
@@ -12,7 +16,7 @@
     <div class="purelane-hero__content">
       {%- if purelane_heading != blank -%}
         <div {{ purelane_heading.shopify_attributes }}>
-          {% render 'purelane-section-heading', heading: purelane_heading.settings.heading, eyebrow: purelane_heading.settings.eyebrow, description: purelane_heading.settings.description, alignment: section.settings.content_alignment, heading_tag: 'h1' %}
+          {% render 'purelane-section-heading', heading: purelane_heading.settings.heading, eyebrow: purelane_heading.settings.eyebrow, description: purelane_heading.settings.description, alignment: section.settings.content_alignment, heading_tag: purelane_heading_tag %}
         </div>
       {%- endif -%}
       <div class="purelane-hero__actions">
@@ -36,7 +40,7 @@
       {%- endif -%}
       {%- for block in section.blocks -%}
         {%- if block.type == 'bundle_offer' and block.settings.bundle_definition != blank -%}
-          <div class="purelane-hero__offer" {{ block.shopify_attributes }}>{% render 'purelane-bundle-card', bundle_definition: block.settings.bundle_definition, variant: 'hero' %}</div>
+          <div class="purelane-hero__offer" {{ block.shopify_attributes }}>{% render 'purelane-bundle-card', bundle_definition: block.settings.bundle_definition %}</div>
         {%- endif -%}
       {%- endfor -%}
     </div>
