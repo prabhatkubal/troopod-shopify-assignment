@@ -40,8 +40,8 @@ reason. This is also a natural place to note what you did NOT get to, per their 
 "we don't expect all five finished" line — be straight about it.
 -->
 
-- **Hero:** [not yet started — architecture phase in progress] — update once built
-- **Shop / Product Grid:** [not yet started] — update once built
+- **Hero:** The prototype's static copy, inline product stage, duplicate desktop/mobile promise markup, and scroll-linked animated scenes are now a merchant-editable section with shared heading/button/badge/bundle-card snippets, separate background and foreground media, and no scene animation system — product content stays editable and the architecture performance decision is applied.
+- **Shop / Product Grid:** The prototype's hardcoded product cards, prices, ratings, and inline SVG product artwork are now a collection-driven grid using the seeded Best Sellers collection and shared product-card rendering — catalog data and edge-case handling come from Shopify products instead of page markup.
 - **Best-selling Combos:** [not yet started] — update once built
 - **Bundles:** [not yet started] — update once built
 - **Reviews Rail:** [not yet started] — update once built

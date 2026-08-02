@@ -1,0 +1,87 @@
+{% comment %}Architecture decision: Hero owns merchant-editable media and uses shared blocks, without restoring the prototype's scroll-linked scene system.{% endcomment %}
+{%- assign purelane_heading = section.blocks | where: 'type', 'heading' | first -%}
+
+<section class="purelane-hero color-{{ section.settings.color_scheme }} gradient" style="--purelane-hero-overlay: {{ section.settings.overlay_color }}; --purelane-hero-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; --purelane-hero-fallback: {{ section.settings.background_color }}; --purelane-hero-padding-top: {{ section.settings.padding_top }}px; --purelane-hero-padding-bottom: {{ section.settings.padding_bottom }}px;">
+  {%- if section.settings.background_image != blank -%}
+    <div class="purelane-hero__background" aria-hidden="true">
+      {{ section.settings.background_image | image_url: width: 3840 | image_tag: widths: '375, 550, 750, 1100, 1500, 2000, 3000, 3840', sizes: '100vw', loading: 'eager', fetchpriority: 'high', class: 'purelane-hero__background-image', alt: '' }}
+    </div>
+  {%- endif -%}
+  <div class="purelane-hero__overlay" aria-hidden="true"></div>
+  <div class="purelane-hero__inner page-width purelane-hero__inner--{{ section.settings.content_alignment }}">
+    <div class="purelane-hero__content">
+      {%- if purelane_heading != blank -%}
+        <div {{ purelane_heading.shopify_attributes }}>
+          {% render 'purelane-section-heading', heading: purelane_heading.settings.heading, eyebrow: purelane_heading.settings.eyebrow, description: purelane_heading.settings.description, alignment: section.settings.content_alignment, heading_tag: 'h1' %}
+        </div>
+      {%- endif -%}
+      <div class="purelane-hero__actions">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'button' -%}
+            <div {{ block.shopify_attributes }}>{% render 'purelane-button', label: block.settings.label, url: block.settings.url, variant: block.settings.style %}</div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      <div class="purelane-hero__badges" role="list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'badge' -%}
+            <div role="listitem" {{ block.shopify_attributes }}>{% render 'purelane-badge', label: block.settings.label, variant: block.settings.variant %}</div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+    <div class="purelane-hero__visual">
+      {%- if section.settings.foreground_image != blank -%}
+        {{ section.settings.foreground_image | image_url: width: 1200 | image_tag: widths: '375, 550, 750, 900, 1200', sizes: '(min-width: 990px) 42vw, 88vw', loading: 'eager', fetchpriority: 'high', class: 'purelane-hero__foreground-image', alt: section.settings.foreground_image.alt }}
+      {%- endif -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'bundle_offer' and block.settings.bundle_definition != blank -%}
+          <div class="purelane-hero__offer" {{ block.shopify_attributes }}>{% render 'purelane-bundle-card', bundle_definition: block.settings.bundle_definition, variant: 'hero' %}</div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .purelane-hero { position: relative; isolation: isolate; overflow: hidden; padding-top: var(--purelane-hero-padding-top); padding-bottom: var(--purelane-hero-padding-bottom); background: var(--purelane-hero-fallback); }
+  .purelane-hero__background, .purelane-hero__overlay { position: absolute; z-index: -2; inset: 0; }
+  .purelane-hero__background-image { width: 100%; height: 100%; object-fit: cover; }
+  .purelane-hero__overlay { z-index: -1; background: var(--purelane-hero-overlay); opacity: var(--purelane-hero-overlay-opacity); }
+  .purelane-hero__inner { display: grid; align-items: center; gap: clamp(2.4rem, 6vw, 7.2rem); min-height: clamp(48rem, 72svh, 76rem); }
+  .purelane-hero__content, .purelane-hero__visual { min-width: 0; }
+  .purelane-hero__inner--center .purelane-hero__content { text-align: center; }
+  .purelane-hero__inner--right .purelane-hero__content { text-align: right; }
+  .purelane-hero__actions, .purelane-hero__badges { display: flex; flex-wrap: wrap; gap: var(--purelane-space-3); margin-top: var(--purelane-space-6); }
+  .purelane-hero__badges { margin-top: var(--purelane-space-3); }
+  .purelane-hero__inner--center .purelane-hero__actions, .purelane-hero__inner--center .purelane-hero__badges { justify-content: center; }
+  .purelane-hero__inner--right .purelane-hero__actions, .purelane-hero__inner--right .purelane-hero__badges { justify-content: flex-end; }
+  .purelane-hero__visual { display: grid; gap: var(--purelane-space-4); justify-items: center; }
+  .purelane-hero__foreground-image { display: block; width: min(100%, 52rem); height: auto; }
+  .purelane-hero__offer { width: min(100%, 42rem); }
+  @media screen and (min-width: 750px) { .purelane-hero__inner { grid-template-columns: minmax(0, 1fr) minmax(28rem, 0.8fr); } .purelane-hero__inner--right .purelane-hero__content { order: 2; } .purelane-hero__inner--right .purelane-hero__visual { order: 1; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Purelane hero", "tag": "section", "class": "section",
+  "settings": [
+    { "type": "image_picker", "id": "background_image", "label": "Background image" },
+    { "type": "color", "id": "background_color", "label": "Background fallback color", "default": "#F4F7F2" },
+    { "type": "color", "id": "overlay_color", "label": "Overlay color", "default": "#003F3A" },
+    { "type": "range", "id": "overlay_opacity", "min": 0, "max": 90, "step": 5, "unit": "%", "label": "Overlay opacity", "default": 25 },
+    { "type": "image_picker", "id": "foreground_image", "label": "Foreground product image" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "select", "id": "content_alignment", "label": "Content alignment", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "left" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding bottom", "default": 64 }
+  ],
+  "blocks": [
+    { "type": "heading", "name": "Heading", "limit": 1, "settings": [{ "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Clean that lasts" }, { "type": "text", "id": "eyebrow", "label": "Eyebrow" }, { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Effective plant-based homecare for every room.</p>" }] },
+    { "type": "button", "name": "Button", "settings": [{ "type": "text", "id": "label", "label": "Label", "default": "Shop now" }, { "type": "url", "id": "url", "label": "Link" }, { "type": "select", "id": "style", "label": "Style", "options": [{ "value": "primary", "label": "Primary" }, { "value": "secondary", "label": "Secondary" }], "default": "primary" }] },
+    { "type": "bundle_offer", "name": "Bundle offer", "limit": 1, "settings": [{ "type": "metaobject", "id": "bundle_definition", "label": "Bundle definition", "metaobject_type": "bundle_definition" }] },
+    { "type": "badge", "name": "Badge", "settings": [{ "type": "text", "id": "label", "label": "Label" }, { "type": "select", "id": "variant", "label": "Style", "options": [{ "value": "promotional", "label": "Promotional" }, { "value": "featured", "label": "Featured" }, { "value": "sold-out", "label": "Sold out" }], "default": "promotional" }] }
+  ],
+  "presets": [{ "name": "Purelane hero", "blocks": [{ "type": "heading" }, { "type": "button" }, { "type": "button", "settings": { "label": "Learn more", "style": "secondary" } }, { "type": "badge", "settings": { "label": "Plant powered" } }, { "type": "badge", "settings": { "label": "Kids and pet safe" } }, { "type": "badge", "settings": { "label": "Zero harsh chemicals" } }] }]
+}
+{% endschema %}
