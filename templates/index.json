@@ -143,6 +143,12 @@
     "combos_AkLAtF": {
       "type": "combos",
       "blocks": {
+        "combo_zJ4kfm": {
+          "type": "combo",
+          "settings": {
+            "bundle_definition": "bundle-definition-yeh95yfi"
+          }
+        },
         "combo_z7wDp9": {
           "type": "combo",
           "settings": {
@@ -151,6 +157,7 @@
         }
       },
       "block_order": [
+        "combo_zJ4kfm",
         "combo_z7wDp9"
       ],
       "name": "Purelane combos",
