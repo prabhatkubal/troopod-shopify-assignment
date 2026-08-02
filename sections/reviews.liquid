@@ -1,0 +1,62 @@
+{% comment %}Architecture decision: Reviews uses local testimonial rating markup because purelane-rating-stars reads product review-app metafields, while these blocks own raw testimonial ratings.{% endcomment %}
+<section class="purelane-reviews purelane-reviews--{{ section.settings.layout }} color-{{ section.settings.color_scheme }} gradient" style="--purelane-reviews-padding-top: {{ section.settings.padding_top }}px; --purelane-reviews-padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="purelane-reviews__inner page-width">
+    {% render 'purelane-section-heading', heading: section.settings.heading, eyebrow: section.settings.eyebrow, description: section.settings.description, alignment: section.settings.content_alignment, heading_tag: 'h2' %}
+    <div class="purelane-reviews__cards" role="list"{% if section.settings.layout == 'rail' %} tabindex="0" aria-label="{{ section.settings.rail_label | escape }}"{% endif %}>
+      {%- for block in section.blocks -%}
+        {%- assign purelane_rating_percent = block.settings.rating | times: 20 -%}
+        <article class="purelane-reviews__card" role="listitem" {{ block.shopify_attributes }}>
+          <div class="purelane-reviews__rating" role="img" aria-label="{{ block.settings.rating }} out of 5 stars">
+            <span class="purelane-reviews__stars" aria-hidden="true" style="background: linear-gradient(90deg, var(--purelane-accent-color) 0%, var(--purelane-accent-color) {{ purelane_rating_percent }}%, rgba(var(--color-foreground), 0.2) {{ purelane_rating_percent }}%, rgba(var(--color-foreground), 0.2) 100%); -webkit-background-clip: text; background-clip: text; color: transparent;">★★★★★</span>
+          </div>
+          <blockquote class="purelane-reviews__quote rte">{{ block.settings.review }}</blockquote>
+          <footer class="purelane-reviews__author">
+            {%- if block.settings.avatar != blank -%}
+              {{ block.settings.avatar | image_url: width: 120 | image_tag: widths: '60, 90, 120', sizes: '4.8rem', loading: 'lazy', class: 'purelane-reviews__avatar', alt: block.settings.avatar.alt }}
+            {%- endif -%}
+            <div>
+              {%- if block.settings.customer_name != blank -%}<strong>{{ block.settings.customer_name | escape }}</strong>{%- endif -%}
+              {%- if block.settings.location != blank -%}<span>{{ block.settings.location | escape }}</span>{%- endif -%}
+            </div>
+          </footer>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .purelane-reviews { padding-top: var(--purelane-reviews-padding-top); padding-bottom: var(--purelane-reviews-padding-bottom); }
+  .purelane-reviews__cards { display: grid; gap: var(--purelane-space-4); margin-top: var(--purelane-space-8); }
+  .purelane-reviews--rail .purelane-reviews__cards { grid-auto-columns: minmax(27rem, 34rem); grid-auto-flow: column; grid-template-columns: none; overflow-x: auto; overscroll-behavior-inline: contain; padding: 0 0 var(--purelane-space-3); scroll-snap-type: inline mandatory; scrollbar-width: thin; }
+  .purelane-reviews--rail .purelane-reviews__card { scroll-snap-align: start; }
+  .purelane-reviews__cards:focus-visible { outline: 0.2rem solid rgb(var(--color-foreground)); outline-offset: 0.4rem; }
+  .purelane-reviews__card { display: grid; align-content: start; gap: var(--purelane-space-4); height: 100%; padding: var(--purelane-space-6); border: 0.1rem solid rgba(var(--color-foreground), 0.16); border-radius: var(--purelane-button-radius); background: rgb(var(--color-background)); }
+  .purelane-reviews__stars { color: var(--purelane-accent-color); font-size: 1.8rem; letter-spacing: 0.08em; }
+  .purelane-reviews__quote { margin: 0; padding: 0; border: 0; color: rgb(var(--color-foreground)); }
+  .purelane-reviews__author { display: flex; align-items: center; gap: var(--purelane-space-3); }
+  .purelane-reviews__author strong, .purelane-reviews__author span { display: block; }
+  .purelane-reviews__author span { color: rgba(var(--color-foreground), 0.7); font-size: 1.2rem; }
+  .purelane-reviews__avatar { width: 4.8rem; height: 4.8rem; border-radius: 50%; object-fit: cover; }
+  @media screen and (min-width: 750px) { .purelane-reviews--grid .purelane-reviews__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media screen and (min-width: 990px) { .purelane-reviews--grid .purelane-reviews__cards { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Purelane reviews", "tag": "section", "class": "section",
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "What customers say" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "richtext", "id": "description", "label": "Description" },
+    { "type": "select", "id": "content_alignment", "label": "Heading alignment", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "center" },
+    { "type": "select", "id": "layout", "label": "Layout", "options": [{ "value": "rail", "label": "Scrollable rail" }, { "value": "grid", "label": "Grid" }], "default": "rail" },
+    { "type": "text", "id": "rail_label", "label": "Scrollable rail label", "default": "Customer reviews" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding top", "default": 36 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding bottom", "default": 36 }
+  ],
+  "blocks": [{ "type": "review", "name": "Review", "settings": [{ "type": "text", "id": "customer_name", "label": "Customer name" }, { "type": "range", "id": "rating", "min": 1, "max": 5, "step": 1, "label": "Rating", "default": 5 }, { "type": "richtext", "id": "review", "label": "Review text" }, { "type": "text", "id": "location", "label": "Location" }, { "type": "image_picker", "id": "avatar", "label": "Avatar image" }] }],
+  "presets": [{ "name": "Purelane reviews" }]
+}
+{% endschema %}

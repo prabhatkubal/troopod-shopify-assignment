@@ -44,7 +44,7 @@ reason. This is also a natural place to note what you did NOT get to, per their 
 - **Shop / Product Grid:** The prototype's hardcoded product cards, prices, ratings, and inline SVG product artwork are now a collection-driven grid using the seeded Best Sellers collection and shared product-card rendering — catalog data and edge-case handling come from Shopify products instead of page markup.
 - **Best-selling Combos:** The prototype's hardcoded combo cards and duplicated bundle details are now repeatable blocks that reference shared bundle-definition records and render through one bundle-card path — canonical bundle content is reused across placements.
 - **Bundles:** The prototype's three hardcoded quantity and price tiers are now repeatable blocks referencing the shared bundle-definition records and the shared bundle-card renderer — tier order and visibility are editable while product pricing stays catalog-owned.
-- **Reviews Rail:** [not yet started] — update once built
+- **Reviews Rail:** The prototype's duplicated auto-marquee cards and hardcoded five-star reviews are now merchant-managed testimonial blocks in a keyboard-focusable manual rail or grid, with each rating rendered from its block value — reviews are announced once and no content is duplicated for animation.
 
 ## What I'd do with more time
 
