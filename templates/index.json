@@ -71,7 +71,7 @@
       "settings": {
         "background_image": "shopify://shop_images/Generated_Image_August_02_2026_-_8_32PM.jpg",
         "background_color": "#f4f7f2",
-        "overlay_color": "#16E3D3",
+        "overlay_color": "#16e3d3",
         "overlay_opacity": 25,
         "color_scheme": "",
         "content_alignment": "left",
@@ -162,6 +162,60 @@
     },
     "reviews_yczmXi": {
       "type": "reviews",
+      "blocks": {
+        "review_fxwmJV": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Verified buyer",
+            "rating": 5,
+            "review": "<p><br/><strong>Sparkling taps again</strong><br/><br/>Hard water had ruined our bathroom fittings. Two sprays and the scale wipes straight off, no scrubbing.<br/></p>",
+            "location": "Tap cleaner"
+          }
+        },
+        "review_7bBr4c": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Rohit S.",
+            "rating": 5,
+            "review": "<p><br/><strong>Dog friendly</strong><br/><br/>Hard water had ruined our bathroom fittings. Two sprays and the scale wipes straight off, no scrubbing.<br/></p>",
+            "location": "Floor cleaner"
+          }
+        },
+        "review_8Batcg": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Sunita",
+            "rating": 5,
+            "review": "<p><br/><strong>Great product, great packaging</strong><br/><br/>Very soft on hands with a lovely fragrance, and it feels good to be using far less plastic.</p>",
+            "location": "Liquid handwash"
+          }
+        },
+        "review_7UQ389": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Priya",
+            "rating": 5,
+            "review": "<p><br/><strong>Best dishwash ever</strong><br/><br/>Our old dishwash left my help with dry, cracked skin. That stopped completely after we switched.<br/><br/></p>",
+            "location": "Dishwash gel"
+          }
+        },
+        "review_eQ9TeR": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Anita",
+            "rating": 5,
+            "review": "<p><br/><strong>Works like a charm</strong><br/><br/>Finally an eco option that cleans as well as the chemical detergent I used for years, and it smells better.</p>",
+            "location": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_fxwmJV",
+        "review_7bBr4c",
+        "review_8Batcg",
+        "review_7UQ389",
+        "review_eQ9TeR"
+      ],
       "name": "Purelane reviews",
       "settings": {
         "heading": "What customers say",
