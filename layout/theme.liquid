@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="js" lang="{{ request.locale.iso_code }}">
+<html class="js" lang="{{ request.locale.iso_code }}" data-purelane-motion="{% if settings.purelane_animations_enabled %}on{% else %}off{% endif %}">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -58,6 +58,7 @@
     <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'standard-actions-override.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'purelane.js' | asset_url }}" defer="defer"></script>
 
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
@@ -77,6 +78,13 @@
       {{ body_font_italic | font_face: font_display: 'swap' }}
       {{ body_font_bold_italic | font_face: font_display: 'swap' }}
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
+
+      :root {
+        --purelane-brand-color: {{ settings.purelane_brand_color }};
+        --purelane-accent-color: {{ settings.purelane_accent_color }};
+        --purelane-button-radius: {{ settings.purelane_button_radius }}px;
+        --purelane-animation-duration: {{ settings.purelane_animation_speed }}ms;
+      }
 
       {% for scheme in settings.color_schemes -%}
         {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
@@ -277,6 +285,10 @@
         }
       }
     {% endstyle %}
+
+    <link rel="stylesheet" href="{{ 'purelane-base.css' | asset_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ 'purelane-components.css' | asset_url }}" media="print" onload="this.media='all'">
+    <noscript>{{ 'purelane-base.css' | asset_url | stylesheet_tag }}{{ 'purelane-components.css' | asset_url | stylesheet_tag }}</noscript>
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">

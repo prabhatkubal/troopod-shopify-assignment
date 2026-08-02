@@ -1,0 +1,58 @@
+:root {
+  --purelane-brand-color: #005d55;
+  --purelane-accent-color: #d9822b;
+  --purelane-button-radius: 0.6rem;
+  --purelane-animation-duration: 220ms;
+  --purelane-space-2: 0.8rem;
+  --purelane-space-3: 1.2rem;
+  --purelane-space-4: 1.6rem;
+  --purelane-space-6: 2.4rem;
+  --purelane-space-8: 3.2rem;
+}
+
+.purelane-button,
+.purelane-product-card,
+.purelane-bundle-card,
+.purelane-section-heading,
+.purelane-rating-stars,
+.purelane-badge {
+  box-sizing: border-box;
+}
+
+.purelane-section-heading,
+.purelane-bundle-card {
+  color: rgb(var(--color-foreground));
+  font-family: var(--font-body-family);
+  font-style: var(--font-body-style);
+}
+
+.purelane-button {
+  border-radius: var(--purelane-button-radius);
+  transition: transform var(--purelane-animation-duration) ease, box-shadow var(--purelane-animation-duration) ease;
+}
+
+.purelane-button:focus-visible,
+.purelane-product-card a:focus-visible,
+.purelane-bundle-card a:focus-visible {
+  outline: 0.2rem solid rgb(var(--color-foreground));
+  outline-offset: 0.3rem;
+}
+
+html[data-purelane-motion='off'] .purelane-button {
+  transition: none;
+}
+
+html[data-purelane-motion='off'] .purelane-product-card,
+html[data-purelane-motion='off'] .purelane-bundle-card {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .purelane-button,
+  .purelane-product-card,
+  .purelane-bundle-card {
+    animation: none !important;
+    scroll-behavior: auto;
+    transition: none !important;
+  }
+}

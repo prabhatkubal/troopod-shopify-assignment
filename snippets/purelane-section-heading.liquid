@@ -1,0 +1,28 @@
+{% comment %}Architecture decision: new shared heading primitive prevents repeated editorial hierarchy across future modules.{% endcomment %}
+{% doc %}
+  Renders a shared editorial heading.
+
+  @param {string} heading - Required heading text.
+  @param {string} [eyebrow] - Optional eyebrow text.
+  @param {string} [description] - Optional description.
+  @param {string} [alignment] - `left`, `center`, or `right`.
+  @param {string} [heading_tag] - `h1`, `h2`, or `h3`.
+{% enddoc %}
+
+{%- if heading != blank -%}
+  <header class="purelane-section-heading purelane-section-heading--{{ alignment | default: 'left' }}">
+    {%- if eyebrow != blank -%}
+      <p class="purelane-section-heading__eyebrow">{{ eyebrow | escape }}</p>
+    {%- endif -%}
+    {%- if heading_tag == 'h1' -%}
+      <h1 class="purelane-section-heading__title">{{ heading | escape }}</h1>
+    {%- elsif heading_tag == 'h3' -%}
+      <h3 class="purelane-section-heading__title">{{ heading | escape }}</h3>
+    {%- else -%}
+      <h2 class="purelane-section-heading__title">{{ heading | escape }}</h2>
+    {%- endif -%}
+    {%- if description != blank -%}
+      <div class="purelane-section-heading__description rte">{{ description }}</div>
+    {%- endif -%}
+  </header>
+{%- endif -%}

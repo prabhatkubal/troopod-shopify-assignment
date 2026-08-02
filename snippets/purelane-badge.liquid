@@ -1,0 +1,11 @@
+{% comment %}Architecture decision: new shared badge primitive keeps product and offer statuses visually consistent without replacing Dawn status logic.{% endcomment %}
+{% doc %}
+  Renders a labelled status badge.
+
+  @param {string} label - Badge text.
+  @param {string} [variant] - `sold-out`, `featured`, or `promotional`.
+{% enddoc %}
+
+{%- if label != blank -%}
+  <span class="purelane-badge purelane-badge--{{ variant | default: 'promotional' }}">{{ label | escape }}</span>
+{%- endif -%}

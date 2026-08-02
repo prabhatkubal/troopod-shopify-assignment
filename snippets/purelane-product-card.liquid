@@ -1,0 +1,40 @@
+{% comment %}Architecture decision: extend Dawn card-product so catalog states remain Dawn-owned while Purelane adds scoped presentation and compact composition support.{% endcomment %}
+{% doc %}
+  Renders a Dawn product card or a compact product representation.
+
+  @param {product} product - Product to render.
+  @param {string} [media_aspect_ratio] - Dawn media aspect ratio.
+  @param {boolean} [show_rating] - Whether to show review-app ratings.
+  @param {boolean} [quick_add] - Whether to enable Dawn quick add.
+  @param {string} [section_id] - Parent section ID for Dawn quick add.
+  @param {boolean} [compact] - Render the compact product representation.
+{% enddoc %}
+
+{%- if compact -%}
+  <article class="purelane-product-card purelane-product-card--compact">
+    <a class="purelane-product-card__media" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+      {%- if product.featured_media != blank -%}
+        {{
+          product.featured_media
+          | image_url: width: 240
+          | image_tag:
+            widths: '120, 180, 240',
+            sizes: '72px',
+            loading: 'lazy',
+            class: 'purelane-product-card__image',
+            alt: product.featured_media.alt
+        }}
+      {%- else -%}
+        {{ 'product-apparel-2' | placeholder_svg_tag: 'purelane-product-card__placeholder placeholder-svg' }}
+      {%- endif -%}
+    </a>
+    <a class="purelane-product-card__title" href="{{ product.url }}">{{ product.title | escape }}</a>
+  </article>
+{%- else -%}
+  <div class="purelane-product-card">
+    {%- if product.metafields.custom.marketing_label.value != blank and product.available -%}
+      {% render 'purelane-badge', label: product.metafields.custom.marketing_label.value, variant: 'promotional' %}
+    {%- endif -%}
+    {% render 'card-product', card_product: product, media_aspect_ratio: media_aspect_ratio, show_rating: show_rating, quick_add: quick_add, section_id: section_id %}
+  </div>
+{%- endif -%}

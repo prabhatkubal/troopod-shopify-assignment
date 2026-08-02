@@ -1,0 +1,21 @@
+{% comment %}Architecture decision: new shared CTA wrapper keeps all future calls-to-action on Dawn's accessible button styles.{% endcomment %}
+{% doc %}
+  Renders a Purelane-styled Dawn button.
+
+  @param {string} label - Button label.
+  @param {string} url - Button destination.
+  @param {string} [variant] - `primary` or `secondary`.
+  @param {string} [class] - Additional CSS class.
+{% enddoc %}
+
+{%- if label != blank -%}
+  {%- if url != blank -%}
+    <a class="button purelane-button{% if variant == 'secondary' %} button--secondary{% endif %}{% if class != blank %} {{ class }}{% endif %}" href="{{ url }}">
+      {{- label | escape -}}
+    </a>
+  {%- else -%}
+    <span class="button purelane-button{% if variant == 'secondary' %} button--secondary{% endif %}{% if class != blank %} {{ class }}{% endif %}" aria-disabled="true">
+      {{- label | escape -}}
+    </span>
+  {%- endif -%}
+{%- endif -%}

@@ -232,6 +232,49 @@
     ]
   },
   {
+    "name": "Purelane foundation",
+    "settings": [
+      {
+        "type": "color",
+        "id": "purelane_brand_color",
+        "label": "Brand color",
+        "default": "#005D55"
+      },
+      {
+        "type": "color",
+        "id": "purelane_accent_color",
+        "label": "Accent color",
+        "default": "#D9822B"
+      },
+      {
+        "type": "range",
+        "id": "purelane_button_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "Button corner radius",
+        "default": 6
+      },
+      {
+        "type": "checkbox",
+        "id": "purelane_animations_enabled",
+        "label": "Enable decorative motion",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "purelane_animation_speed",
+        "min": 100,
+        "max": 1000,
+        "step": 50,
+        "unit": "ms",
+        "label": "Animation duration",
+        "default": 250
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.buttons.name",
     "settings": [
       {

@@ -1,0 +1,58 @@
+{% comment %}Architecture decision: new shared bundle card renders the one bundle_definition metaobject for all future offer placements.{% endcomment %}
+{% doc %}
+  Renders a bundle_definition metaobject entry.
+
+  @param {metaobject} bundle_definition - The shared bundle definition to render.
+  @param {string} [variant] - Presentation modifier for a future parent.
+{% enddoc %}
+
+{%- if bundle_definition != blank -%}
+  {%- assign purelane_bundle_product = bundle_definition.purchasable_bundle_product.value -%}
+  {%- assign purelane_cta_url = bundle_definition.cta_target_override.value -%}
+  {%- if purelane_cta_url == blank and purelane_bundle_product != blank -%}
+    {%- assign purelane_cta_url = purelane_bundle_product.url -%}
+  {%- endif -%}
+  {%- assign purelane_cta_label = bundle_definition.cta_label.value | default: 'Shop the bundle' -%}
+  {%- assign purelane_sold_out_label = 'products.product.sold_out' | t -%}
+  <article class="purelane-bundle-card{% if bundle_definition.featured.value %} purelane-bundle-card--featured{% endif %}{% if variant != blank %} purelane-bundle-card--{{ variant }}{% endif %}">
+    <div class="purelane-bundle-card__badges">
+      {% render 'purelane-badge', label: bundle_definition.promotional_badge_label.value, variant: 'promotional' %}
+      {%- if bundle_definition.featured.value -%}
+        {% render 'purelane-badge', label: bundle_definition.featured_badge_label.value, variant: 'featured' %}
+      {%- endif -%}
+    </div>
+    <div class="purelane-bundle-card__products">
+      {%- for product in bundle_definition.included_products.value -%}
+        {% render 'purelane-product-card', product: product, compact: true %}
+      {%- endfor -%}
+    </div>
+    <div class="purelane-bundle-card__content">
+      <h3 class="purelane-bundle-card__title">{{ bundle_definition.title.value | escape }}</h3>
+      {%- if bundle_definition.description.value != blank -%}
+        {% comment %}Rich text uses its bare field reference for metafield_tag; `.value` is used only for the blank check.{% endcomment %}
+        <div class="purelane-bundle-card__description rte">{{ bundle_definition.description | metafield_tag }}</div>
+      {%- endif -%}
+      {%- if purelane_bundle_product != blank -%}
+        {% render 'price', product: purelane_bundle_product, price_class: 'purelane-bundle-card__price', show_compare_at_price: true %}
+      {%- endif -%}
+      {%- if bundle_definition.per_product_message.value != blank -%}
+        <p class="purelane-bundle-card__per-product-message">{{ bundle_definition.per_product_message.value | escape }}</p>
+      {%- endif -%}
+      {%- if bundle_definition.benefit_lines.value != blank -%}
+        <ul class="purelane-bundle-card__benefits" role="list">
+          {%- for benefit in bundle_definition.benefit_lines.value -%}
+            <li>{{ benefit | escape }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      {%- if purelane_cta_url != blank and purelane_bundle_product.available -%}
+        {% render 'purelane-button', label: purelane_cta_label, url: purelane_cta_url, variant: 'primary' %}
+      {%- elsif purelane_bundle_product != blank and purelane_bundle_product.available == false -%}
+        {% render 'purelane-badge', label: purelane_sold_out_label, variant: 'sold-out' %}
+      {%- else -%}
+        <!-- Phase 4: replace this editor-only incomplete state with the parent section's merchant guidance. -->
+        <p class="purelane-bundle-card__incomplete" role="status">{{ 'products.product.unavailable' | t }}</p>
+      {%- endif -%}
+    </div>
+  </article>
+{%- endif -%}
