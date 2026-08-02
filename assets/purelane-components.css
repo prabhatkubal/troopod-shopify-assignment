@@ -49,7 +49,10 @@
   white-space: normal;
 }
 
-.purelane-product-card .card__badge,
+.purelane-product-card .card__badge {
+  display: block;
+}
+
 .purelane-product-card .price__badge-sale,
 .purelane-product-card .price__badge-sold-out {
   display: none;
