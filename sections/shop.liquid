@@ -16,13 +16,15 @@
     {% render 'purelane-section-heading', heading: section.settings.heading, eyebrow: section.settings.eyebrow, description: section.settings.description, alignment: section.settings.content_alignment, heading_tag: 'h2' %}
 
     {%- if purelane_has_products -%}
-      <ul class="purelane-shop__grid" role="list">
-        {%- for product in purelane_collection.products limit: section.settings.products_to_show -%}
-          <li class="purelane-shop__item">
-            {% render 'purelane-product-card', product: product, media_aspect_ratio: section.settings.image_ratio, show_rating: section.settings.show_rating, section_id: section.id %}
-          </li>
-        {%- endfor -%}
-      </ul>
+      {% paginate purelane_collection.products by section.settings.products_to_show %}
+        <ul class="purelane-shop__grid" role="list">
+          {%- for product in purelane_collection.products limit: section.settings.products_to_show -%}
+            <li class="purelane-shop__item">
+              {% render 'purelane-product-card', product: product, media_aspect_ratio: section.settings.image_ratio, show_rating: section.settings.show_rating, section_id: section.id %}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {% endpaginate %}
     {%- else -%}
       <p class="purelane-shop__empty" role="status">{{ section.settings.empty_state_message | escape }}</p>
     {%- endif -%}

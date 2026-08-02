@@ -3,6 +3,7 @@
   Renders a bundle_definition metaobject entry.
 
   @param {metaobject} bundle_definition - The shared bundle definition to render.
+  @param {string} [variant] - Presentation modifier for a future parent.
 {% enddoc %}
 
 {%- if bundle_definition != blank -%}
@@ -13,7 +14,7 @@
   {%- endif -%}
   {%- assign purelane_cta_label = bundle_definition.cta_label.value | default: 'Shop the bundle' -%}
   {%- assign purelane_sold_out_label = 'products.product.sold_out' | t -%}
-  <article class="purelane-bundle-card{% if bundle_definition.featured.value %} purelane-bundle-card--featured{% endif %}">
+  <article class="purelane-bundle-card{% if bundle_definition.featured.value %} purelane-bundle-card--featured{% endif %}{% if variant != blank %} purelane-bundle-card--{{ variant }}{% endif %}">
     <div class="purelane-bundle-card__badges">
       {% render 'purelane-badge', label: bundle_definition.promotional_badge_label.value, variant: 'promotional' %}
       {%- if bundle_definition.featured.value -%}

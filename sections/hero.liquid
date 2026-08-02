@@ -40,7 +40,7 @@
       {%- endif -%}
       {%- for block in section.blocks -%}
         {%- if block.type == 'bundle_offer' and block.settings.bundle_definition != blank -%}
-          <div class="purelane-hero__offer" {{ block.shopify_attributes }}>{% render 'purelane-bundle-card', bundle_definition: block.settings.bundle_definition %}</div>
+          <div class="purelane-hero__offer" {{ block.shopify_attributes }}>{% render 'purelane-bundle-card', bundle_definition: block.settings.bundle_definition, variant: 'hero' %}</div>
         {%- endif -%}
       {%- endfor -%}
     </div>
