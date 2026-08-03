@@ -11,6 +11,18 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "smooth_scroll_bCg8xc": {
+      "type": "smooth-scroll",
+      "name": "Smooth Scroll",
+      "settings": {
+        "onhow_studio_core_logic": "built-by-onhow-studio",
+        "enable": true,
+        "smoothness": 10,
+        "wheel_speed": 7,
+        "sync_touch": false,
+        "respect_motion": true
+      }
+    },
     "footer": {
       "type": "footer",
       "settings": {
@@ -30,6 +42,7 @@
     }
   },
   "order": [
+    "smooth_scroll_bCg8xc",
     "footer"
   ]
 }
