@@ -242,6 +242,17 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "contact_form_mjcUCV": {
+      "type": "contact-form",
+      "name": "t:sections.contact-form.presets.name",
+      "settings": {
+        "heading": "Contact form",
+        "heading_size": "h1",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
@@ -249,6 +260,7 @@
     "shop_cfzNAN",
     "bundles_R6nzJ9",
     "combos_AkLAtF",
-    "reviews_yczmXi"
+    "reviews_yczmXi",
+    "contact_form_mjcUCV"
   ]
 }
